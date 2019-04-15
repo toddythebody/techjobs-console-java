@@ -25,9 +25,26 @@ public class JobData {
      * Fetch list of all values from loaded data,
      * without duplicates, for a given column.
      *
-     * @param field The column to retrieve values from
+     * @param Field The column to retrieve values from
      * @return List of all of the values of the given field
      */
+
+    public static ArrayList<HashMap<String, String>> findByValue(String term) {
+        ArrayList<HashMap<String, String>> jobs = findAll();
+        ArrayList<HashMap<String, String>> post = new ArrayList<>();
+        for (HashMap<String, String> job : jobs) {
+            for (String value : job.values()) {
+                String valueLower = value.toLowerCase();
+                String termLower = term.toLowerCase();
+                if (valueLower.contains(termLower)) {
+                    post.add(job);
+                    break;
+                }
+            }
+        }
+        return post;
+    }
+
     public static ArrayList<String> findAll(String field) {
 
         // load data, if not already loaded
@@ -75,8 +92,10 @@ public class JobData {
         for (HashMap<String, String> row : allJobs) {
 
             String aValue = row.get(column);
+            String aValueLower = aValue.toLowerCase();
+            String valueLower = value.toLowerCase();
 
-            if (aValue.contains(value)) {
+            if (aValueLower.contains(valueLower)) {
                 jobs.add(row);
             }
         }
