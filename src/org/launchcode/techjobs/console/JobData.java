@@ -10,6 +10,7 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Collection;
 
 /**
  * Created by LaunchCode
@@ -68,7 +69,9 @@ public class JobData {
         // load data, if not already loaded
         loadData();
 
-        return allJobs;
+
+
+        return new ArrayList<>(allJobs);
     }
 
     /**
